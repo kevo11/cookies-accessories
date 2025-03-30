@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies Accessories</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: url('Cookies accessories.png') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            filter: blur(10px);
+            z-index: -1;
+        }
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+            max-width: 400px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+        .logo {
+            width: 100px;
+            border-radius: 50%;
+        }
+        .links {
+            margin-top: 20px;
+        }
+        .link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: black;
+            color: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            background: white;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        .show {
+            display: block;
+        }
+        .phone-link {
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+        }
+        @media (min-width: 768px) {
+            .phone-link {
+                pointer-events: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu" onclick="toggleShareMenu()">⋮</div>
+    <div class="dropdown" id="shareMenu">
+        <p onclick="sharePage()">🔗 مشاركة الموقع</p>
+    </div>
+    
+    <div class="container">
+        <img src="Cookies accessories.png" alt="Cookies Accessories Logo" class="logo">
+        <h2>Cookies Accessories</h2>
+        <div class="links">
+            <div class="link" onclick="handlePhoneClick()">
+                Phone Number
+                <span onclick="event.stopPropagation(); shareLink('tel:01224113921')">⋮</span>
+            </div>
+            <div class="link" onclick="window.open('https://www.facebook.com/groups/629484889387802/?ref=share&mibextid=NSMWBT', '_blank')">
+                Facebook
+                <span onclick="event.stopPropagation(); shareLink('https://www.facebook.com/groups/629484889387802/?ref=share&mibextid=NSMWBT')">⋮</span>
+            </div>
+            <div class="link" onclick="window.open('https://www.instagram.com/cookiesaccessories3921?igsh=MXh6M3E0ZGV3bW96dw==', '_blank')">
+                Instagram
+                <span onclick="event.stopPropagation(); shareLink('https://www.instagram.com/cookiesaccessories3921?igsh=MXh6M3E0ZGV3bW96dw==')">⋮</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleShareMenu() {
+            document.getElementById('shareMenu').classList.toggle('show');
+        }
+        function sharePage() {
+            navigator.share({
+                title: 'Cookies Accessories',
+                url: window.location.href
+            }).catch(err => console.log('مشاركة غير مدعومة', err));
+        }
+        function shareLink(url) {
+            navigator.share({
+                url: url
+            }).catch(err => console.log('مشاركة غير مدعومة', err));
+        }
+        function handlePhoneClick() {
+            if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+                window.location.href = 'tel:01224113921';
+            } else {
+                alert('يرجى استخدام هاتف محمول للاتصال');
+            }
+        }
+    </script>
+</body>
+</html>
